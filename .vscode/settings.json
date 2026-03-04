@@ -1,0 +1,11 @@
+{
+  "C_Cpp.copilotHover": "enabled",
+  "github.copilot.enable": {
+    "*": true
+  },
+  "chat.disableAIFeatures": false,
+  "emmet.useInlineCompletions": true,
+  "editor.inlineSuggest.enabled": true,
+  "editor.inlineSuggest.experimental.showOnSuggestConflict": "always",
+  "editor.inlineSuggest.edits.allowCodeShifting": "never"
+}
