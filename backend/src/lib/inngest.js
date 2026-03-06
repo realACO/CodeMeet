@@ -1,6 +1,6 @@
 import { Inngest } from "inngest";
 import { connectDB } from "./db.js";
-import User from "./models/User.js";
+import User from "../models/user.js";
 
 export const inngest = new Inngest({ id: "CodeMeet" });
 
@@ -9,10 +9,11 @@ const syncUser = inngest.createFunction(
   { event: "clerk/user.created" },
   async ({ event }) => {
     await connectDB();
-    const { id, email_address, first_name, last_name, image_url } = event.data;
+    const { id, email_addresses, first_name, last_name, image_url } =
+      event.data;
     const newUser = {
       clerkId: id,
-      email: email_address[0]?.email_address,
+      email: email_addresses[0]?.email_address,
       name: `${first_name || ""} ${last_name || ""}`,
       profileImage: image_url,
     };
