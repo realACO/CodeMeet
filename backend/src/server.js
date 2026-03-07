@@ -1,10 +1,13 @@
 import express from "express";
 import path from "path";
-import { ENV } from "./lib/env.js";
-import { connectDB } from "./lib/db.js";
 import cors from "cors";
 import { serve } from "inngest/express";
+import { clerkMiddleware } from "@clerk/express";
+
+import { ENV } from "./lib/env.js";
+import { connectDB } from "./lib/db.js";
 import { inngest, functions } from "./lib/inngest.js";
+import chatRoutes from "./routes/chatRoutes.js";
 
 const app = express();
 
@@ -17,6 +20,9 @@ app.use(express.json());
 app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
 
 app.use("/api/inngest", serve({ client: inngest, functions }));
+
+app.use(clerkMiddleware()); //this will add auth object to the request if the user is authenticated, which we can use in our routes
+app.use("/api/chat", chatRoutes);
 
 app.get("/health", (req, res) => {
   res.status(200).json({ msg: "success api is running" });
