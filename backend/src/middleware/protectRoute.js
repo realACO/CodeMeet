@@ -1,3 +1,5 @@
+//we will use this middleware to protect routes that require authentication. It will check if the user is authenticated using Clerk and then find the corresponding user in our database. If the user is found, it will attach the user object to the request and allow access to the route. If not, it will return an unauthorized error.
+
 import { requireAuth } from "@clerk/express";
 import User from "../models/User.js";
 
