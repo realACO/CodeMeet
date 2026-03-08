@@ -8,6 +8,7 @@ import { ENV } from "./lib/env.js";
 import { connectDB } from "./lib/db.js";
 import { inngest, functions } from "./lib/inngest.js";
 import chatRoutes from "./routes/chatRoutes.js";
+import sessionRoutes from "./routes/sessionRoute.js";
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use("/api/inngest", serve({ client: inngest, functions }));
 
 app.use(clerkMiddleware()); //this will add auth object to the request if the user is authenticated, which we can use in our routes
 app.use("/api/chat", chatRoutes);
+app.use("/api/sessions", sessionRoutes);
 
 app.get("/health", (req, res) => {
   res.status(200).json({ msg: "success api is running" });
