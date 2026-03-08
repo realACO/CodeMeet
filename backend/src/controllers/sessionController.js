@@ -66,7 +66,7 @@ export async function getMyRecentSessions(req, res) {
     //where user is eigther host or pwrticipant
     const sessions = await Session.find({
       status: "completed",
-      $or: [{ host: userId }, { participants: userId }],
+      $or: [{ host: userId }, { participant: userId }],
     })
       .sort({ createdAt: -1 })
       .limit(20);
@@ -83,7 +83,7 @@ export async function getSessionById(req, res) {
     const { id } = req.params;
     const session = await Session.findById(id)
       .populate("host", "name email profileImage clerkId")
-      .populate("participants", "name email profileImage clerkId");
+      .populate("participant", "name email profileImage clerkId");
 
     if (!session) return res.status(404).json({ msg: "Session not found" });
 
