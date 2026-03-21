@@ -1,11 +1,12 @@
 {
   "C_Cpp.copilotHover": "enabled",
   "github.copilot.enable": {
-    "*": false,
+    "*": true,
     "plaintext": false,
     "markdown": false,
     "scminput": false,
-    "javascriptreact": true
+    "javascriptreact": true,
+    "javascript": true
   },
   "chat.disableAIFeatures": false,
   "emmet.useInlineCompletions": true,
