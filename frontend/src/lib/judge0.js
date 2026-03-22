@@ -1,12 +1,21 @@
 //Judge0 API runs our code
 const JUDGE0_API = "https://ce.judge0.com/submissions?wait=true";
 
+// const LANGUAGE_VERSIONS = {
+//   javascript: { language_id: 63 },
+//   python: { language_id: 71 },
+//   java: { language_id: 62 },
+// };
+
 const LANGUAGE_VERSIONS = {
+  c: { language_id: 50 },
+  cpp: { language_id: 54 },
   javascript: { language_id: 63 },
   python: { language_id: 71 },
   java: { language_id: 62 },
+  csharp: { language_id: 51 },
+  php: { language_id: 68 },
 };
-
 /**
  * @param {string} language - programming language
  * @param {string} code - source code to execute
