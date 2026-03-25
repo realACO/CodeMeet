@@ -17,7 +17,7 @@ const __dirname = path.resolve();
 //middlewares
 app.use(express.json());
 
-//credentials true meaning server allows browser to include cookies on request
+//credentials true meaning server allows browser to include cookies on req
 app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
 
 app.use("/api/inngest", serve({ client: inngest, functions }));
