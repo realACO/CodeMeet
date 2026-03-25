@@ -20,10 +20,6 @@ app.use(express.json());
 //credentials true meaning server allows browser to include cookies on request
 app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
 
-app.get("/", (req, res) => {
-  res.send("Backend is running 🚀");
-});
-
 app.use("/api/inngest", serve({ client: inngest, functions }));
 
 app.use(clerkMiddleware()); //this will add auth object to the request if the user is authenticated, which we can use in our routes
