@@ -17,8 +17,22 @@ const __dirname = path.resolve();
 //middlewares
 app.use(express.json());
 
+//new code
+const allowedOrigins = [ENV.CLIENT_URL, ENV.CUSTOM_DOMAIN].filter(Boolean);
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error("Not allowed by CORS"));
+    },
+    credentials: true,
+  }),
+);
+
 //credentials true meaning server allows browser to include cookies on req
-app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
+// app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
 
 app.use("/api/inngest", serve({ client: inngest, functions }));
 
@@ -30,7 +44,7 @@ app.get("/health", (req, res) => {
   res.status(200).json({ msg: "success api is running" });
 });
 
-if (ENV.NODE_ENV === "development") {
+if (ENV.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
   app.get("/{*any}", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
